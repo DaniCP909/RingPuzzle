@@ -1,5 +1,6 @@
 const N_RINGS = 4;
-const N_GROOVES  = 30;
+const N_GROOVES  = 15;
+const DEGREES_STEP = (360 / N_GROOVES);
 
 class RingImg {
     constructor(ring_id, path, father, n_rings) {
@@ -56,6 +57,7 @@ let clickedMouse = {
     y: 0,
 }
 let mouseAngle = 0;
+let mouseDegrees = 0;
 
 function clickDown(e) {
     clickedMouse.x = e.clientX;
@@ -66,9 +68,10 @@ function clickDown(e) {
             console.log(ri.ring_id);
             selectedRing = ri.ring_id;
             isDragging = true;
+            mouseAngle = Math.atan2(clickedMouse.y - all_rings[0].center[1], clickedMouse.x - all_rings[0].center[0]);
+            mouseDegrees = mouseAngle * (180 / Math.PI);
         }
     }
-    mouseAngle = Math.atan2(clickedMouse.y - all_rings[0].center[1], clickedMouse.x - all_rings[0].center[0]);
     //console.log(all_rings[0].isClicked(mouseX, mouseY));
     //console.log(mouseX + " " + mouseY + " | " + ri.center[0] + " " + ri.center[1]);
 }
@@ -81,19 +84,16 @@ function dragMove(e) {
         const degrees = angle * (180 / Math.PI);
 
 
-        const final_degrees = angle - mouseAngle;
-        console.log("angulo mouse: " + mouseAngle + " | angle: " + angle);
-        drag_img.ringimg.style.transform = `rotate(${final_degrees}rad)`;
-        
-
+        const final_degrees = degrees - mouseDegrees;
+        console.log("mouse degrees: " + mouseDegrees + " | degrees: " + degrees);
+        if((final_degrees.toFixed(0) % DEGREES_STEP.toFixed(0)) == 0)drag_img.ringimg.style.transform = `rotate(${final_degrees}deg)`;
     }
 }
 
 function clickUp() {
     isDragging = false;
-    clickedMouse.x = 0;
-    clickedMouse.y = 0;
-
+    mouseAngle = 0;
+    mouseDegrees = 0;
 }
 
 document.addEventListener('mousedown', clickDown);
