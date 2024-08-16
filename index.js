@@ -1,6 +1,6 @@
 import {RingImg} from "./RingImg.js"
 const N_RINGS = 4;
-const N_GROOVES  = 90;
+const N_GROOVES  = 360;
 const DEGREES_STEP = (360 / N_GROOVES);
 
 
