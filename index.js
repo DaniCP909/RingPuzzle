@@ -12,7 +12,7 @@ document.addEventListener('dragstart', (e) => {
     e.preventDefault();
 });
 
-const puzzle = createRingPuzzle("images", N_RINGS, puzzlecontainer);
+const puzzle = createRingPuzzle("images", N_RINGS, puzzlecontainer, 60);
 
-sleep(5000).then(() => { puzzle.remove() } );
+//sleep(30000).then(() => { puzzle.remove() } );
 

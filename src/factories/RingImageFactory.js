@@ -6,6 +6,7 @@ export const createRingImagePiece = (ring_id, path, n_rings, father) => {
     img.style.height = `100%`;
     img.style.userSelect = `none`;
     img.style.gridArea = `1 / 1`;
+    //simg.style.transition = `transform 0.25s ease`
     father.appendChild(img);
     const rect = img.getBoundingClientRect();
     function dist(x1, x2, y1, y2) {

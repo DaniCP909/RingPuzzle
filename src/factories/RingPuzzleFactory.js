@@ -1,8 +1,8 @@
 import { createRingImagePiece } from "./RingImageFactory.js";
 
 
-export const createRingPuzzle = (path, n_rings, father) => {
-    const N_GROOVES = 360;
+export const createRingPuzzle = (path, n_rings, father, ngrooves) => {
+    const N_GROOVES = ngrooves;
     const DEGREES_STEP = (360 / N_GROOVES);
     let isDragging = false;
     let selectedRing = -1;
@@ -38,13 +38,22 @@ export const createRingPuzzle = (path, n_rings, father) => {
             const dragging_degrees = dragging_rads * (180 / Math.PI);
 
             finalDegrees = acumm_degrees[selectedRing] + (dragging_degrees - mouseDegrees);
-            if((finalDegrees.toFixed(0) % DEGREES_STEP.toFixed(0)) == 0) img_dragging.element.style.transform = `rotate(${finalDegrees}deg)`;
+            const normalizedDegrees = (finalDegrees / DEGREES_STEP).toFixed(0) * DEGREES_STEP; 
+            img_dragging.element.style.transform = `rotate(${normalizedDegrees}deg)`;
         }
     }
 
     function clickUp() {
         isDragging = false;
         acumm_degrees[selectedRing] = finalDegrees;
+        console.log(finalDegrees);
+    }
+
+    function initOffsets(nrings) {
+        offsets = [];
+        for(var i = 0; i < nrings; i++) {
+            offsets.push(0);
+        }
     }
     for(var i = 0; i < n_rings; i++) {
         const r_img = createRingImagePiece(i, (path + "/ring_" + i + ".png"), n_rings, father);
