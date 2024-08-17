@@ -1,5 +1,3 @@
-import {dist} from "../eclideanOps/dists.js"
-
 export const createRingImagePiece = (ring_id, path, n_rings, father) => {
     const img = document.createElement('img');
     img.src = path;
