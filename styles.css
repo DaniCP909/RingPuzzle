@@ -16,3 +16,7 @@ body {
     width: 400;
     height: 400;
 }
+
+#solved {
+    color:aquamarine;
+}
