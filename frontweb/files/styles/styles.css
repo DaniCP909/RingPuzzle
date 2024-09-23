@@ -1,0 +1,32 @@
+body {
+    background-color: rgb(59, 59, 59);
+}
+
+#puzzlearea {
+    display: grid;
+    place-items: center;
+}
+
+#puzzlecontainer {
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    place-items: center;
+    width: 300;
+    height: 300;
+}
+
+#solved {
+    color:aquamarine;
+}
+
+#logo {
+    display: grid;
+    place-items: center;
+    height: 100;
+}
+
+#image-logo {
+    width: 200;
+}
