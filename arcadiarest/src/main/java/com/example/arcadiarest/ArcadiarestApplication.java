@@ -1,4 +1,4 @@
-package com.example.arcadiarest.arcadiarest;
+package com.example.arcadiarest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
