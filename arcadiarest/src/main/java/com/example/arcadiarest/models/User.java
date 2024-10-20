@@ -9,6 +9,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -16,6 +18,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Table(name = "users")
@@ -43,6 +46,10 @@ public class User implements UserDetails{
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<SolvedBy> solvedBy;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -125,6 +132,14 @@ public class User implements UserDetails{
 
     public void setUpdatedAt(LocalDateTime time) {
         this.updatedAt = time;
+    }
+
+    public List<SolvedBy> getSolvedBy() {
+        return this.solvedBy;
+    }
+
+    public void setSolvedBy(List<SolvedBy> solvedBy) {
+        this.solvedBy = solvedBy;
     }
 
     //@Override 
