@@ -4,9 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.arcadiarest.models.RingPuzzle;
+import com.example.arcadiarest.models.SolvedBy;
+import com.example.arcadiarest.models.User;
 import com.example.arcadiarest.repositories.IRingPuzzleRepository;
 
 @Service
@@ -14,6 +18,9 @@ public class RingPuzzleService {
 
     @Autowired
     private IRingPuzzleRepository ringPuzzleRepository;
+
+    @Autowired
+    private SolvedByService solvedByService;
 
     public List<RingPuzzle> findAll() {
         return ringPuzzleRepository.findAll();
@@ -31,8 +38,26 @@ public class RingPuzzleService {
         return ringPuzzleRepository.save(ringPuzzle);
     }
 
-    public RingPuzzle findByAccessionNumber(String accesionNumber) {
-        return ringPuzzleRepository.findByAccessionNumber(accesionNumber).get();
+    public void deleteRingPuzzle(Long id) {
+        ringPuzzleRepository.deleteById(id);
+    }
+
+    public void deleteByAccessionNumber(String accessionNumber) {
+        ringPuzzleRepository.deleteByAccessionNumber(accessionNumber);
+    }
+
+    public RingPuzzle findByAccessionNumber(String accessionNumber) {
+        return ringPuzzleRepository.findByAccessionNumber(accessionNumber)
+        .orElseThrow(()-> new RuntimeException("RingPuzzle not found with accession number: " + accessionNumber));
+    }
+
+    public SolvedBy getRandomUnsolvedRPByUser(User user) {
+        Pageable pageable = PageRequest.of(0,1);
+        if(ringPuzzleRepository.findRandomUnsolvedRPByUser(user, pageable).size() == 0) return null;
+
+        RingPuzzle ringPuzzle = ringPuzzleRepository.findRandomUnsolvedRPByUser(user, pageable).get(0);
+        SolvedBy newSolvedByRecord = new SolvedBy(ringPuzzle, user);
+        return solvedByService.save(newSolvedByRecord);
     }
 
 }

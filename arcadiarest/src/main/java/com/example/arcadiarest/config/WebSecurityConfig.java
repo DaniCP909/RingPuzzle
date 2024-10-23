@@ -33,7 +33,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**", "/ringpuzzle/**").permitAll()
+                .requestMatchers("/auth/**", "/ringpuzzle/**", "/random_ringpuzzle").permitAll()
                 .requestMatchers("/users/**", "/ringpuzzles/**").authenticated()
                 .anyRequest()
                 .authenticated()
