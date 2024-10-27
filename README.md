@@ -33,3 +33,4 @@ The project is divided into three main parts:
 >  - There are basic operations for entities not implemented yet.
 >  - Current solution for login seems to be a bad practice because I did a custom management for security.
 >  - JWT should be managed by cookies
+
