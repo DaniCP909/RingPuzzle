@@ -32,9 +32,10 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**", "/ringpuzzle/**", "/random_ringpuzzle").permitAll()
-                .requestMatchers("/users/**", "/ringpuzzles/**").authenticated()
+                .requestMatchers("/auth/**", "/ringpuzzle/**", "/random_ringpuzzle", "/users/**", "/ringpuzzles/**").permitAll()
+                .requestMatchers( "/aux/").authenticated()
                 .anyRequest()
                 .authenticated()
             )
@@ -48,8 +49,8 @@ public class WebSecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("http://localhost:8005"));
-        configuration.setAllowedMethods(List.of("GET", "POST"));
+        configuration.setAllowedOrigins(List.of("http://localhost:8005", "http://localhost:5173"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

@@ -19,6 +19,8 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class SolvedBy {
 
+    private static final int MIN_SCALE = 4;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
@@ -51,7 +53,7 @@ public class SolvedBy {
     public SolvedBy(RingPuzzle ringPuzzle, User user) {
         this.solvedRingPuzzle = ringPuzzle;
         this.user = user;
-        this.scalesSolved = 0;
+        this.scalesSolved = MIN_SCALE;
         this.difficultyLevels = 0;
         this.solvedAt = null;
         this.ringsPosition = new ArrayList<Double>();

@@ -91,8 +91,8 @@ public class DBInit {
 
             log.info("Preloading " + ringPuzzleService.saveRingPuzzle(rp0));
             log.info("Preloading " + ringPuzzleService.saveRingPuzzle(rp1));
-            log.info("Preloading " + ringPuzzleService.saveRingPuzzle(rp2));
-            log.info("Preloading " + ringPuzzleService.saveRingPuzzle(rp3));
+            //log.info("Preloading " + ringPuzzleService.saveRingPuzzle(rp2));
+            //log.info("Preloading " + ringPuzzleService.saveRingPuzzle(rp3));
 
             log.info("Preloading " + solvedByService.save(sb0));
             log.info("Preloading " + solvedByService.save(sb1));

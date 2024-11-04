@@ -22,7 +22,7 @@ import com.ringpuzzle.ringpuzzlerest.services.SolvedByService;
 @RestController
 public class RingPuzzleController {
 
-    private static final int ID_LEN_4_GUESTS = 4;
+    private static final int ID_LEN_4_GUESTS = 2;
 
     @Autowired
     private RingPuzzleService ringPuzzleService;
